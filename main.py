@@ -22,8 +22,11 @@ class LoginScreen(Screen):
 class RootWidget(ScreenManager):
     pass
 
+
+
 class SignUpScreen(Screen):
-    pass
+    def add_user(self, uname, pword):
+        print(uname, pword)
 
 class MainApp(App):
     def build(self):
@@ -34,6 +37,6 @@ if __name__ == "__main__":
     MainApp().run()
 
 
-"""The highest in hierarchy is the APP object (line28).
+"""The highest in hierarchy is the APP object (line30).
 Then comes the ScreenManager (line22) which is represented by RootWidget.
 And then comes Screen (line9) which is represented by LoginScreen"""

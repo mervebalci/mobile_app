@@ -28,14 +28,22 @@
         Label:
             text: "Sign up for a space journey!"
         TextInput:
+            id: username
             hint_text: "New Username"
         TextInput:
+            id: password
             hint_text: "New Password"
         Button:
             text: "Submit"
+            on_press: root.add_user(root.ids.username.text, root.ids.password.text)
             # When the user press the submit button, the username and the password will be send to database where usernames and passwords are saved.
             # And this database is a json file which will be writable and readable.
-
+            # root refers to SignUpScreen (in kivy file), add_user is the method in SignUpScreen Class (in python file)
+            # ids is a property of the SignUpScreen Object which comes from Screen (in python file)
+            # # Screen is inherited to SignUpScreen and SignUpScreen has this id which gives a sort of dictionary with all the ids contained in the SignUpScreen.
+            # So in this case, it gives access to username, to password.
+            # root.ids.password gives text to the TextInput Object which has an id, a password
+            # With .text, the value of the object (username or password object) becomes accessible.
 
 
 # RootWidget is an invisible widget that keeps records of all the screens of the app.
