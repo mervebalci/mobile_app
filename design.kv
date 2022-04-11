@@ -19,6 +19,23 @@
                 text: "Forgot Password"
             Button:
                 text: "Sign Up"
+                on_press: root.sign_up()
+
+
+<SignUpScreen>:
+    GridLayout:
+        cols: 1
+        Label:
+            text: "Sign up for a space journey!"
+        TextInput:
+            hint_text: "New Username"
+        TextInput:
+            hint_text: "New Password"
+        Button:
+            text: "Submit"
+            # When the user press the submit button, the username and the password will be send to database where usernames and passwords are saved.
+            # And this database is a json file which will be writable and readable.
+
 
 
 # RootWidget is an invisible widget that keeps records of all the screens of the app.
@@ -26,6 +43,8 @@
 <RootWidget>:
     LoginScreen:
         name: "login_screen"
+    SignUpScreen:
+        name: "sign_up_screen"
 
 
 # GridLayout, LoginScreen, TextInput, Button, RootWidget are python objects.
