@@ -5,6 +5,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 # Builder is the connection between main.py and design.kv
 Builder.load_file('design.kv')
 
+
 # LoginScreen has to inherit from Screen
 class LoginScreen(Screen):
     def sign_up(self):
@@ -18,25 +19,27 @@ class LoginScreen(Screen):
         # So current of manager and manager of LoginScreen. And this current attribute will get the name of the screen which is sign_up_screen.
         # This sign_up_screen in here, which is a widget that have been created in design.kv
 
+
 # RootWidget has to inherit from ScreenManager
 class RootWidget(ScreenManager):
     pass
-
 
 
 class SignUpScreen(Screen):
     def add_user(self, uname, pword):
         print(uname, pword)
 
+
 class MainApp(App):
     def build(self):
         return RootWidget()
         # Make sure to return the OBJECT not the CLASS !!!
 
+
 if __name__ == "__main__":
     MainApp().run()
 
 
-"""The highest in hierarchy is the APP object (line30).
+"""The highest in hierarchy is the APP object (line29).
 Then comes the ScreenManager (line22) which is represented by RootWidget.
 And then comes Screen (line9) which is represented by LoginScreen"""
