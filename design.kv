@@ -1,0 +1,32 @@
+# Here RootWidget is the parent, and then comes LoginScreen.
+# Under LoginScreen, there are children such as GridLayout (line8), then another GridLayout (line10), then TextInput and so on.
+<LoginScreen>:
+    GridLayout:
+        cols: 1
+        GridLayout:
+            cols: 1
+            Label:
+                text: "User Login"
+            TextInput:
+                hint_text: "Username"
+            TextInput:
+                hint_text: "Password"
+            Button:
+                text: "Login"
+        GridLayout:
+            cols: 2
+            Button:
+                text: "Forgot Password"
+            Button:
+                text: "Sign Up"
+
+
+# RootWidget is an invisible widget that keeps records of all the screens of the app.
+# LoginScreen is a child of the RootWidget.
+<RootWidget>:
+    LoginScreen:
+        name: "login_screen"
+
+
+# GridLayout, LoginScreen, TextInput, Button, RootWidget are python objects.
+# Login Screen and RootWidget are OBJECTS represented by CLASSES which are created in the python file
