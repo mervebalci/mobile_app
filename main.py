@@ -1,6 +1,8 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+import json
+from datetime import datetime
 
 # Builder is the connection between main.py and design.kv
 Builder.load_file('design.kv')
@@ -27,7 +29,20 @@ class RootWidget(ScreenManager):
 
 class SignUpScreen(Screen):
     def add_user(self, uname, pword):
-        print(uname, pword)
+        with open("users.json") as file:
+            users = json.load(file)
+        # First open users.json as file, and get the users load in a dictionary. Now, IMPORT JSON here which is line4
+
+
+        # Creating the format of json file
+        # To see the date and time of creating, IMPORT DATETIME from datetime (line5)
+        users[uname] = {'username': uname, 'password': pword, 
+            'created': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+        
+
+        # To add the user info to json file, should use WRITE mode 'w' and DUMP the user's info (which is a dictionary) to the file.
+        with open("users.json", 'w') as file:
+            json.dump(users, file)
 
 
 class MainApp(App):
@@ -40,6 +55,6 @@ if __name__ == "__main__":
     MainApp().run()
 
 
-"""The highest in hierarchy is the APP object (line33).
-Then comes the ScreenManager (line24) which is represented by RootWidget.
-And then comes Screen (line10) which is represented by LoginScreen"""
+"""The highest in hierarchy is the APP object (line48).
+Then comes the ScreenManager (line26) which is represented by RootWidget.
+And then comes Screen (line12) which is represented by LoginScreen"""
