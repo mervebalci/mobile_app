@@ -47,7 +47,11 @@ class SignUpScreen(Screen):
 
 
 class SignUpScreenSuccess(Screen):
-    pass
+    def go_to_login(self):
+        # The movement to the next screen always goes towards the LEFT.
+        # However, it is better to go towards RIGHT from the sign up successful page TO BACK to login page. And to do that:
+        self.manager.transition.direction = 'right'
+        self.manager.current = "login_screen"
 
 
 class MainApp(App):
