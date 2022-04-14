@@ -43,6 +43,11 @@ class SignUpScreen(Screen):
         # To add the user info to json file, should use WRITE mode 'w' and DUMP the user's info (which is a dictionary) to the file.
         with open("users.json", 'w') as file:
             json.dump(users, file)
+        self.manager.current = "sign_up_screen_success"
+
+
+class SignUpScreenSuccess(Screen):
+    pass
 
 
 class MainApp(App):

@@ -46,6 +46,15 @@
             # With .text, the value of the object (username or password object) becomes accessible.
 
 
+<SignUpScreenSuccess>:
+    GridLayout:
+        cols:1
+        Label:
+            text: "Sign up successful!"
+        Button:
+            text: "Login page"
+
+
 # RootWidget is an invisible widget that keeps records of all the screens of the app.
 # LoginScreen is a child of the RootWidget.
 <RootWidget>:
@@ -53,6 +62,8 @@
         name: "login_screen"
     SignUpScreen:
         name: "sign_up_screen"
+    SignUpScreenSuccess:
+        name: "sign_up_screen_success"
 
 
 # GridLayout, LoginScreen, TextInput, Button, RootWidget are python objects.
