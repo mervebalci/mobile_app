@@ -1,3 +1,5 @@
+#:kivy 1.0
+
 # Here RootWidget is the parent, and then comes LoginScreen.
 # Under LoginScreen, there are children such as GridLayout (line8), then another GridLayout (line10), then TextInput and so on.
 <LoginScreen>:
@@ -8,11 +10,21 @@
             Label:
                 text: "User Login"
             TextInput:
+                id: username
                 hint_text: "Username"
             TextInput:
+                id: password
                 hint_text: "Password"
             Button:
                 text: "Login"
+                on_press: root.login(root.ids.username.text, root.ids.password.text)
+                # So when you are in the kivy file, root will point to the associated class, which is <LoginScreen>
+                # In python file, self is pointing to LoginScreen class. 
+                # And <loginScreen> in kivy file will communicate to class LoginScreen in python file and they receive data.
+                # That means self knows about the ids and all the widgets that the logging screen contains.
+            Label:
+                id: wrong_login
+                text: ""
         GridLayout:
             cols: 2
             Button:
@@ -40,7 +52,7 @@
             # And this database is a json file which will be writable and readable.
             # root refers to SignUpScreen (in kivy file), add_user is the method in SignUpScreen Class (in python file)
             # ids is a property of the SignUpScreen Object which comes from Screen (in python file)
-            # # Screen is inherited to SignUpScreen and SignUpScreen has this id which gives a sort of dictionary with all the ids contained in the SignUpScreen.
+            # Screen is inherited to SignUpScreen and SignUpScreen has this id which gives a sort of dictionary with all the ids contained in the SignUpScreen.
             # So in this case, it gives access to username, to password.
             # root.ids.password gives text to the TextInput Object which has an id, a password
             # With .text, the value of the object (username or password object) becomes accessible.
@@ -48,12 +60,28 @@
 
 <SignUpScreenSuccess>:
     GridLayout:
-        cols:1
+        cols: 1
         Label:
             text: "Sign up successful!"
         Button:
             text: "Login page"
             on_press: root.go_to_login()
+
+
+<LoginScreenSuccess>:
+    GridLayout:
+        cols: 1
+        Button:
+            text: "Logout"
+            on_press: root.log_out()
+        Label:
+            text: "How do you feel?"
+        TextInput:
+            hint_text: "Things to try: happy, sad, unloved..."
+        Button:
+            text: "Enlighten me"
+        Label:
+            text: ""
 
 
 # RootWidget is an invisible widget that keeps records of all the screens of the app.
@@ -65,7 +93,9 @@
         name: "sign_up_screen"
     SignUpScreenSuccess:
         name: "sign_up_screen_success"
+    LoginScreenSuccess:
+        name: "login_screen_success"
 
 
 # GridLayout, LoginScreen, TextInput, Button, RootWidget are python objects.
-# Login Screen and RootWidget are OBJECTS represented by CLASSES which are created in the python file
+# <Login Screen> <SignUpScreen> <SignUpScreenSuccess> and <RootWidget> are OBJECTS represented by CLASSES which are created in main.py file

@@ -20,6 +20,17 @@ class LoginScreen(Screen):
         # So self is able to access manager and manager has its own attribute which is current.
         # So current of manager and manager of LoginScreen. And this current attribute will get the name of the screen which is sign_up_screen.
         # This sign_up_screen in here, which is a widget that have been created in design.kv
+    
+
+    # Need to open to read json file where the users data are kept and check to see if that username and password are in that file.
+    # If that username is in the file and it has a password, the password of the user is providing in the graphical user interface.
+    def login(self, uname, pword):
+        with open("users.json", 'r') as file:
+            users = json.load(file)
+        if uname in users and users[uname]['password'] == pword:
+            self.manager.current = 'login_screen_success'
+        else:
+           self.ids.wrong_login.text = "Wrong username or password!" 
 
 
 # RootWidget has to inherit from ScreenManager
@@ -54,6 +65,12 @@ class SignUpScreenSuccess(Screen):
         self.manager.current = "login_screen"
 
 
+class LoginScreenSuccess(Screen):
+    def log_out(self):
+        self.manager.transition.direction = 'right'
+        self.manager.current = "login_screen"
+
+
 class MainApp(App):
     def build(self):
         return RootWidget()
@@ -64,6 +81,6 @@ if __name__ == "__main__":
     MainApp().run()
 
 
-"""The highest in hierarchy is the APP object (line57).
-Then comes the ScreenManager (line26) which is represented by RootWidget.
+"""The highest in hierarchy is the APP object (line74).
+Then comes the ScreenManager (line37) which is represented by RootWidget.
 And then comes Screen (line12) which is represented by LoginScreen"""
