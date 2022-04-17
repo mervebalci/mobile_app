@@ -7,36 +7,67 @@
         cols: 1
         GridLayout:
             cols: 1
+            padding: 15, 15
+            spacing: 20, 20
+            # Padding is OUTER SPACE of GridLayout(line8). So, the space between 2 GridLayouts (line6 nad line8)
+            # Spacing is INNER SPACE of the same GridLayout(between GridLayout and Label, Label and TextInput and so on...)
             Label:
                 text: "User Login"
+                font_size: '20sp'
             TextInput:
                 id: username
                 hint_text: "Username"
             TextInput:
                 id: password
+                password: True
                 hint_text: "Password"
-            Button:
-                text: "Login"
-                on_press: root.login(root.ids.username.text, root.ids.password.text)
-                # So when you are in the kivy file, root will point to the associated class, which is <LoginScreen>
-                # In python file, self is pointing to LoginScreen class. 
-                # And <loginScreen> in kivy file will communicate to class LoginScreen in python file and they receive data.
-                # That means self knows about the ids and all the widgets that the logging screen contains.
+            RelativeLayout:    
+                Button:
+                    text: "Login"
+                    on_press: root.login(root.ids.username.text, root.ids.password.text)
+                    # So when you are in the kivy file, root will point to the associated class, which is <LoginScreen>
+                    # In python file, self is pointing to LoginScreen class. 
+                    # And <loginScreen> in kivy file will communicate to class LoginScreen in python file and they receive data.
+                    # That means self knows about the ids and all the widgets that the logging screen contains.
+                    size_hint: 0.3, 0.5
+                    # For sizing the LOGIN button (use 30% of the width and 50% of the height of the child gridlayout)
+                    # And to center the button
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.6}
             Label:
                 id: wrong_login
                 text: ""
         GridLayout:
             cols: 2
+            size_hint: 0.2, 0.2
+            # size_hint allows to make the size is relative (first number is horizontally, second number is vertically)
+            # There are different sizes in mobile devices. So, it is better to keep everything relatively sized.
+            # Without sizing, GridLayout in line8 and GridLayout in line38 share the big GridLayout(line6) half-half.
+            # With sizing 0.2, this GridLayout only occupies 20% space of the mobile screen.
+            padding: 10, 10
+            spacing: 10, 0
             Button:
                 text: "Forgot Password"
+                background_color: 1, 1, 1, 0
+                # RGB and Opacity Format: 0 is the opacity and it means background color is completely transparent.
+                opacity: 1 if self.state == 'normal' else 0.5
+                # root refers to <LoginScreen> and self refers to the current widget which is Button.
+                # 1 if self.state == 'normal' means Forgot Password Button is not pressed. Opacity is 100%
+                # else 0.5 means if the state is not normal which the button is pressed, give 50% to opacity.
+                color: 0.1, 0.7, 1, 1
+                # Color of the text, 10% Red, 70% Green, 100% Blue and opacity 100% which is not transparent at all
             Button:
                 text: "Sign Up"
+                background_color: 1, 1, 1, 0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1, 0.7, 1, 1
                 on_press: root.sign_up()
 
 
 <SignUpScreen>:
     GridLayout:
         cols: 1
+        padding: 20, 20
+        spacing: 20, 20
         Label:
             text: "Sign up for a space journey!"
         TextInput:
