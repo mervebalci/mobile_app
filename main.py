@@ -33,6 +33,8 @@ class LoginScreen(Screen):
         with open("users.json", 'r') as file:
             users = json.load(file)
         if uname in users and users[uname]['password'] == pword:
+            self.manager.transition.direction = 'left'
+            # Everytime when user click on Login Button, screen will slide from right to left.
             self.manager.current = 'login_screen_success'
         else:
             self.ids.wrong_login.text = "Wrong username or password!" 
@@ -64,7 +66,7 @@ class SignUpScreen(Screen):
 
 class SignUpScreenSuccess(Screen):
     def go_to_login(self):
-        # The movement to the next screen always goes towards the LEFT.
+        # The movement to the next screen always goes towards the LEFT, left is default.
         # However, it is better to go towards RIGHT from the sign up successful page TO BACK to login page. And to do that:
         self.manager.transition.direction = 'right'
         self.manager.current = "login_screen"
