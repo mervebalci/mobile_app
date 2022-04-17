@@ -119,9 +119,27 @@
         Button:
             text: "Enlighten me"
             on_press: root.get_quote(root.ids.feeling.text)
-        Label:
-            id: quote
-            text: ""
+        ScrollView:    
+            Label:
+                id: quote
+                text: ""
+                # To wrap the text inside this Label area, so the user can see the entire quote.
+                # self.width => text will get the width of the label where it resides.
+                # If I use self.height instead of None, when I squeeze the window, quote won't fit in the screen anymore. So better to use None!!
+                text_size: self.width, None
+                # With None, when the window is squeezed, text is overlaying on top of other widgets such as "Enlighten me" Button.
+                # Solution is changing the height of the label to fit the height of the text.
+                # For that, size_hinting_y which is the height of the label should be ignored.
+                size_hint_y: None
+                # Without assigning a size, each widget shares the GridLayout equally.
+                # Now, I should give more space to the Label inside the GridLayout, because some quotes are longer and overlaying on top of button.
+                # And height should be dynamic NOT fixed size.
+                height: self.texture_size[1]
+                # texture_size is a tuple which contains 2 items.
+                # First item is width which is [0]. Second item is height which is [1].
+                # With this, Label is dynamic which means it's changing its size depending on the size of the text.
+                # However, it's not ideal. According to the size of the quote, screen is changing.
+                # To solve this, ScrollView widget should be added as parent of Label. 
 
 
 # RootWidget is an invisible widget that keeps records of all the screens of the app.
