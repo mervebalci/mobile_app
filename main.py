@@ -1,6 +1,9 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from hoverable import HoverBehavior
+from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
 import json, glob, random
 from datetime import datetime
 from pathlib import Path
@@ -88,6 +91,10 @@ class LoginScreenSuccess(Screen):
             self.ids.quote.text = "Try Another Feeling!"
 
 
+class ImageButton(ButtonBehavior, HoverBehavior, Image):
+    pass
+
+
 class MainApp(App):
     def build(self):
         return RootWidget()
@@ -98,6 +105,6 @@ if __name__ == "__main__":
     MainApp().run()
 
 
-"""The highest in hierarchy is the APP object (line91).
-Then comes the ScreenManager (line39) which is represented by RootWidget.
-And then comes Screen (line14) which is represented by LoginScreen"""
+"""The highest in hierarchy is the APP object (line98).
+Then comes the ScreenManager (line42) which is represented by RootWidget.
+And then comes Screen (line17) which is represented by LoginScreen"""
