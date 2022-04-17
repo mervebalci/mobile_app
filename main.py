@@ -1,8 +1,10 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-import json
+import json, glob, random
 from datetime import datetime
+from pathlib import Path
+
 
 # Builder is the connection between main.py and design.kv
 Builder.load_file('design.kv')
@@ -69,6 +71,21 @@ class LoginScreenSuccess(Screen):
     def log_out(self):
         self.manager.transition.direction = 'right'
         self.manager.current = "login_screen"
+    
+    def get_quote(self, feel):
+        feel = feel.lower()
+        available_feelings = glob.glob("quotes/*txt")
+        
+        # When click on Enlighten Me! button, to get ONLY the names of the txt files such as ['happy', 'sad', 'unloved'] 
+        # instead of getting ['quotes\\happy.txt', 'quotes\\sad.txt', 'quotes\\unloved.txt']
+        available_feelings = [Path(filename).stem for filename in available_feelings]
+        
+        if feel in available_feelings:
+            with open(f"quotes/{feel}.txt") as file:
+                quotes = file.readlines()
+            self.ids.quote.text = random.choice(quotes)
+        else:
+            self.ids.quote.text = "Try Another Feeling!"
 
 
 class MainApp(App):
@@ -81,6 +98,6 @@ if __name__ == "__main__":
     MainApp().run()
 
 
-"""The highest in hierarchy is the APP object (line74).
-Then comes the ScreenManager (line37) which is represented by RootWidget.
-And then comes Screen (line12) which is represented by LoginScreen"""
+"""The highest in hierarchy is the APP object (line91).
+Then comes the ScreenManager (line39) which is represented by RootWidget.
+And then comes Screen (line14) which is represented by LoginScreen"""
