@@ -107,6 +107,6 @@ if __name__ == "__main__":
     MainApp().run()
 
 
-"""The highest in hierarchy is the APP object (line98).
-Then comes the ScreenManager (line42) which is represented by RootWidget.
+"""The highest in hierarchy is the APP object (line100).
+Then comes the ScreenManager (line44) which is represented by RootWidget.
 And then comes Screen (line17) which is represented by LoginScreen"""
